@@ -36,6 +36,7 @@ header p {
 
 textarea {
     background-color: var(--bg);
+    color: var(--text);
     border-radius: var(--border-m);
     border: 2px solid var(--decoration);
     padding: 12px;
@@ -120,6 +121,7 @@ textarea:focus-visible {
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
     justify-content: start;
+    align-items: center;
     background-color: var(--bg-light);
     border-radius: var(--border-m);
     border: 1px solid var(--text-muted);
