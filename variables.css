@@ -1,0 +1,32 @@
+:root {
+    /* Color variables */
+    --bg: #0c1117;
+    --bg-light: #1b2333;
+    --text: #e6edf4;
+    --text-muted: #8b949e;
+    --decoration: #59a6ff;
+    --danger: #f95249;
+
+    /* Font size variables */
+    --text-2xs: 12px;
+    --text-xs: 16px;
+    --text-s: 18px;
+    --text-m: 22px;
+    --text-l: 24px;
+    --text-xl: 28px;
+    --text-2xl: 32px;
+    --text-3xl: 36px;
+
+    /* Spacing sizes */
+    --space-1: 8px;
+    --space-2: 12px;
+    --space-3: 16px;
+    --space-4: 20px;
+    --space-5: 24px;
+    --space-6: 28px;
+    --space-9: 40px;
+
+    /* Radius */
+    --border-s: 4px;
+    --border-m: 12px
+}
