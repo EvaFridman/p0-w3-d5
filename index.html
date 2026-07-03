@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Транслитерация — это запись русского текста латинскими буквами. Она нужна везде, где кириллица не проходит: в загранпаспортах, url-адресах, никах, именах файлов. ">
+        <meta property="og:title" content="Транслитератор">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="translitter-preview.webp">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:description" content="Транслитерация — это запись русского текста латинскими буквами. Она нужна везде, где кириллица не проходит: в загранпаспортах, url-адресах, никах, именах файлов. ">
+        <title>Транслитератор</title>
+        <link rel="stylesheet" href="index.css">
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <a class="skip-link" href="#main">Перейти к содержимому</a>
+        <header>
+            <h1>Транслитератор</h1>
+            <p>Русский текст латиницей. Каждая строка ввода — это отдельная пара &laquo;оригинал → транслит&raquo;</p>
+        </header>
+        <main id="main">
+            
+            <section class="original-input">
+                <h2 id="input-label">Русский текст</h2>
+                <textarea aria-labelledby="input-label" placeholder="Введите текст..."></textarea>
+                <div class="textarea-buttons">
+                    <button type="submit" class="make-translit">Транслитерировать</button>
+                    <button type="reset" class="clear">Очистить</button>
+                </div>
+            </section>
+
+            <section class="output">
+                <div class="output-heading">
+                    <span>ОРИГИНАЛ</span>
+                    <span>ТРАНСЛИТ</span>
+                </div>
+                <ul class="output-list">
+                    <li class="output-content">
+                        <span class="original-text">Собака сутулая</span>
+                        <span class="translit-text">Sobaka sutulaya</span>
+                        <button class="delete" aria-label="Удалить эту пару">
+                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </li>
+                </ul>
+            </section>
+
+        </main>
+    </body>
+</html>
