@@ -44,6 +44,10 @@ textarea {
     font-size: var(--text-2xs);
 }
 
+.invalid {
+    border-color: var(--danger);
+}
+
 button {
     background-color: var(--bg-light);
     border-radius: var(--border-s);
