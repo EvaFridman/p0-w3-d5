@@ -23,17 +23,17 @@ const translitTable = {
 };
 
 // Регулярное выражение для фильтрации мата
-const hateSpeech = /(?<![а-яё])(?:(?:(?:у|[нз]а|(?:хитро|не)?вз?[ыьъ]|с[ьъ]|(?:и|ра)[зс]ъ?|(?:о[тб]|п[оа]д)[ьъ]?|(?:\S(?=[а-яё]))+?[оаеи-])-?)?(?:[её](?:б(?!о[рй]|рач)|п[уа](?:ц|тс))|и[пб][ае][тцд][ьъ]).*?|(?:(?:н[иеа]|(?:ра|и)[зс]|[зд]?[ао](?:т|дн[оа])?|с(?:м[еи])?|а[пб]ч|в[ъы]?|пр[еи])-?)?ху(?:[яйиеёю]|л+и(?!ган)).*?|бл(?:[эя]|еа?)(?:[дт][ьъ]?)?|\S*?(?:п(?:[иеё]зд|ид[аое]?р|ед(?:р(?!о)|[аое]р|ик)|охую)|бля(?:[дбц]|тс)|[ое]ху[яйиеё]|хуйн).*?|(?:о[тб]?|про|на|вы)?м(?:анд(?:[ауеыи](?:л(?:и[сзщ])?[ауеиы])?|ой|[ао]в.*?|юк(?:ов|[ауи])?|е[нт]ь|ища)|уд(?:[яаиое].+?|е?н(?:[ьюия]|ей))|[ао]л[ао]ф[ьъ](?:[яиюе]|[еёо]й))|елд[ауые].*?|ля[тд]ь|(?:[нз]а|по)х)(?![а-яё])/gim;
+const hateSpeech = /(?<![а-яё])(?:(?:(?:у|[нз]а|(?:хитро|не)?вз?[ыьъ]|с[ьъ]|(?:и|ра)[зс]ъ?|(?:о[тб]|п[оа]д)[ьъ]?|(?:\S(?=[а-яё]))+?[оаеи-])-?)?(?:[её](?:б(?!о[рй]|рач)|п[уа](?:ц|тс))|и[пб][ае][тцд][ьъ]).*?|(?:(?:н[иеа]|(?:ра|и)[зс]|[зд]?[ао](?:т|дн[оа])?|с(?:м[еи])?|а[пб]ч|в[ъы]?|пр[еи])-?)?ху(?:[яйиеёю]|л+и(?!ган)).*?|бл(?:[эя]|еа?)(?:[дт][ьъ]?)?|\S*?(?:п(?:[иеё]зд|ид[аое]?р|ед(?:р(?!о)|[аое]р|ик)|охую)|бля(?:[дбц]|тс)|[ое]ху[яйиеё]|хуйн).*?|(?:о[тб]?|pro|на|вы)?м(?:анд(?:[ауеыи](?:л(?:и[сзщ])?[ауеиы])?|ой|[ао]в.*?|юк(?:ов|[ауи])?|е[нт]ь|ища)|уд(?:[яаиое].+?|е?н(?:[ьюия]|ей))|[ао]л[ао]ф[ьъ](?:[яиюе]|[еёо]й))|елд[ауые].*?|ля[тд]ь|(?:[нз]а|по)х)(?![а-яё])/gim;
 
 // Стартовое состояние страницы
 function renderPage () {
     textarea.value = "Собака сутулая";
-    originalText.textContent = "Собака сутулая";
-    translitText.textContent = "Sobaka sutulaya";
+    if (originalText) originalText.textContent = "Собака сутулая";
+    if (translitText) translitText.textContent = "Sobaka sutulaya";
 }
 renderPage();
 
-// Транслитерация
+// Транслитерация одной строки
 function convertToTranslit(clearedInput) {
     let translitResult = "";
 
@@ -57,52 +57,81 @@ function convertToTranslit(clearedInput) {
     return translitResult;
 }
 
-// Валидация ввода и вывод DOM
+// Валидация ввода
 function inputValidation(text) {
+
+    error.textContent = "";
+    textarea.classList.remove("invalid");
+
     if (!isFieldFilled(text.value)){
         error.textContent = "Введите текст для транслитерации";
+        textarea.classList.add("invalid");
         return null;
     }
 
-    error.textContent = "";
-    
-    return text.value.replace(hateSpeech, "****");
+    if (hateSpeech.test(text.value)) {
+        error.textContent = "Нецензурная лексика запрещена!";
+        textarea.classList.add("invalid");
+        return null; 
+    }
+
+    return text.value;
 }
 
-makeTranslitButton.addEventListener('click', () => {
-
-    const clearedInput = inputValidation(textarea);
-    
-    if (!clearedInput) return;
-
-    const translit = convertToTranslit(clearedInput);
-
+function createListItem(originalLine, translitLine) {
     const li = document.createElement("li");
     li.classList.add("output-content");
 
     const original = document.createElement("p");
     original.classList.add("original-text");
-    original.textContent = clearedInput;
+    original.textContent = originalLine;
 
     const pTranslit = document.createElement("p");
     pTranslit.classList.add("translit-text");
-    pTranslit.textContent = translit;
+    pTranslit.textContent = translitLine;
 
     const button = document.createElement("button");
     button.classList.add("delete");
+    button.setAttribute("aria-label", "Удалить эту пару");
     button.innerHTML = `
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
     </svg>`;
 
-    li.append(original);
-    li.append(pTranslit);
-    li.append(button);
-    outputList.append(li);
+    button.addEventListener('click', () => {
+        li.remove();
+    });
+
+    li.append(original, pTranslit, button);
+    return li;
+}
+
+makeTranslitButton.addEventListener('click', () => {
+    const textData = inputValidation(textarea);
+    if (!textData) return;
+
+    const lines = textData.split('\n');
+
+    for (const line of lines) {
+        if (!line.trim()) continue;
+
+        const translit = convertToTranslit(line);
+        const newLi = createListItem(line, translit);
+        outputList.append(newLi);
+    }
+
+    textarea.value = "";
 });
 
 clearButton.addEventListener('click', () => {
     textarea.value = "";
+    error.textContent = "";
+    textarea.classList.remove("invalid");
 });
 
-// Удаление строк
+// Удаление первой строки из HTML
+if (deleteButton) {
+    deleteButton.addEventListener('click', () => {
+        deleteButton.closest("li").remove();
+    });
+}
