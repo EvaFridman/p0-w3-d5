@@ -86,6 +86,11 @@ textarea:focus-visible {
     gap: var(--space-2);
 }
 
+.error {
+    color: var(--text);
+    font-size: var(--text-xs);
+}
+
 .output {
     display: grid;
     grid-template-columns: 1fr 1fr auto;
