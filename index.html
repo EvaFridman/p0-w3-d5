@@ -16,33 +16,33 @@
     </head>
     <body>
         <a class="skip-link" href="#main">Перейти к содержимому</a>
-        <header>
-            <h1>Транслитератор</h1>
-            <p>Русский текст латиницей. Каждая строка ввода — это отдельная пара &laquo;оригинал → транслит&raquo;</p>
+        <header class="site-header">
+            <h1 class="site-title">Транслитератор</h1>
+            <p class="site-description">Русский текст латиницей. Каждая строка ввода — это отдельная пара &laquo;оригинал → транслит&raquo;</p>
         </header>
-        <main id="main">
+        <main id="main" class="page-main">
             
             <section class="original-input">
-                <h2 id="input-label">Русский текст</h2>
-                <textarea aria-labelledby="input-label" placeholder="Введите текст..."></textarea>
+                <h2 id="input-label" class="section-title">Русский текст</h2>
+                <textarea class="input-textarea" aria-labelledby="input-label" maxlength="300" placeholder="Введите текст..."></textarea>
                 <span class="error"></span>
                 <div class="textarea-buttons">
-                    <button type="submit" class="make-translit">Транслитерировать</button>
-                    <button type="reset" class="clear">Очистить</button>
+                    <button type="submit" class="btn make-translit">Транслитерировать</button>
+                    <button type="reset" class="btn clear">Очистить</button>
                 </div>
             </section>
 
             <section class="output">
                 <div class="output-heading">
-                    <span>ОРИГИНАЛ</span>
-                    <span>ТРАНСЛИТ</span>
+                    <span class="output-heading-original">ОРИГИНАЛ</span>
+                    <span class="output-heading-translit">ТРАНСЛИТ</span>
                 </div>
                 <ul class="output-list">
                     <li class="output-content">
                         <p class="original-text"></p>
                         <p class="translit-text"></p>
-                        <button class="delete" aria-label="Удалить эту пару">
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button class="btn delete" aria-label="Удалить эту пару">
+                            <svg class="icon-close" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1 1L11 11M11 1L1 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                             </svg>
                         </button>

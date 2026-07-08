@@ -13,28 +13,28 @@ body {
     line-height: 1;
 }
 
-main {
+.page-main {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
     gap: var(--space-6);
 }
 
-h1 {
+.site-title {
     font-size: var(--text-xl);
     font-weight: bold;
 }
 
-h2 {
+.section-title {
     font-size: var(--text-xs);
 }
 
-header p {
+.site-description {
     font-size: var(--text-xs);
     color: var(--text-muted);
 }
 
-textarea {
+.input-textarea {
     background-color: var(--bg);
     color: var(--text);
     border-radius: var(--border-m);
@@ -44,7 +44,11 @@ textarea {
     font-size: var(--text-2xs);
 }
 
-button {
+.invalid {
+    border-color: var(--danger);
+}
+
+.btn {
     background-color: var(--bg-light);
     border-radius: var(--border-s);
     outline: 1px solid var(--text-muted);
@@ -59,22 +63,22 @@ button {
     gap: 10px;
 }
 
-button,
-textarea {
+.btn,
+.input-textarea {
     transition: transform 0.15s ease;
 }
 
-button:hover,
-textarea:hover {
+.btn:hover,
+.input-textarea:hover {
     transform: translateY(-2px);
 }
 
-button:active {
+.btn:active {
     transform: translateY(0);
 }
 
-button:focus-visible,
-textarea:focus-visible {
+.btn:focus-visible,
+.input-textarea:focus-visible {
     outline: 2px solid var(--decoration);
     outline-offset: 2px;
 }
@@ -107,7 +111,7 @@ textarea:focus-visible {
     font-size: var(--text-2xs);
 }
 
-.output-heading span:nth-child(2) {
+.output-heading-translit {
     grid-column: 2 / 4;
 }
 
@@ -183,23 +187,23 @@ textarea:focus-visible {
 
 @media (min-width: 640px) and (max-width: 1023px) {
 
-    body {
+    .page {
         margin: 20px 80px;
     }
 
-    h1 {
+    .site-title {
         font-size: var(--text-2xl);
     }
     
-    h2 {
+    .section-title {
         font-size: var(--text-m);
     }
     
-    header p {
+    .site-description {
         font-size: var(--text-m);
     }
     
-    textarea {
+    .input-textarea {
         font-size: var(--text-s);
     }
 
@@ -207,7 +211,7 @@ textarea:focus-visible {
         gap: 15px;
     }
 
-    button {
+    .btn {
         padding: 10px;
     }
 
@@ -236,23 +240,23 @@ textarea:focus-visible {
 }
 
 @media (min-width: 1024px) {
-    body {
+    .page {
         margin: 20px 90px;
     }
 
-    h1 {
+    .site-title {
         font-size: var(--text-3xl);
     }
     
-    h2 {
+    .section-title {
         font-size: var(--text-l);
     }
     
-    header p {
+    .site-description {
         font-size: var(--text-l);
     }
     
-    textarea {
+    .input-textarea {
         font-size: var(--text-m);
     }
 
@@ -260,7 +264,7 @@ textarea:focus-visible {
         gap: 20px;
     }
 
-    button {
+    .btn {
         padding: 12px;
     }
 
